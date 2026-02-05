@@ -82,6 +82,15 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
+echo "Container $VMID resized successfully!"
+
+#Confirm with the user
+read -p "Do you want to start the container? (y/n): " CONFIRM
+if [[ "$CONFIRM" != "y" ]]; then
+    echo "Container will not be started but the resizing process was completed successfully!"
+    exit 1
+fi
+
 #Start the container
 echo "Starting container $VMID..."
 pct start "$VMID"
